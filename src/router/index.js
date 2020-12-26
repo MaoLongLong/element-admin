@@ -1,22 +1,53 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Dashboard from '../views/Dashboard.vue';
+import BasicLayout from '../layouts/BasicLayout.vue';
+import EmptyLayout from '../layouts/EmptyLayout.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: BasicLayout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: Dashboard,
+        meta: {
+          title: '仪表盘',
+          icon: 'el-icon-s-marketing',
+        },
+      },
+      {
+        path: '/cms',
+        component: EmptyLayout,
+        meta: {
+          title: '教室管理',
+          icon: 'el-icon-s-home',
+        },
+        children: [
+          {
+            path: '/cms/building',
+            name: 'Building',
+            component: () => import('../views/cms/Building.vue'),
+            meta: {
+              title: '教学楼管理',
+            },
+          },
+          {
+            path: '/cms/classroom',
+            name: 'Classroom',
+            component: () => import('../views/cms/Classroom.vue'),
+            meta: {
+              title: '教室管理',
+            },
+          },
+        ],
+      },
+    ],
   },
 ];
 
