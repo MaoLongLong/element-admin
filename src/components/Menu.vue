@@ -1,20 +1,20 @@
 <template>
   <el-menu
-    router
-    unique-opened
     :default-active="$route.path"
-    mode="vertical">
+    mode="vertical"
+    router
+    unique-opened>
     <template v-for="(route, i) in routes">
-      <el-submenu v-if="route.children" :key="i" :index="route.path">
+      <el-submenu :index="route.path" :key="i" v-if="route.children">
         <template slot="title">
           <i :class="route.meta.icon"></i>
           <span>{{ route.meta.title }}</span>
         </template>
-        <el-menu-item v-for="(child, j) in route.children" :key="j"
-                      :index="child.path">{{ child.meta.title }}
+        <el-menu-item :index="child.path" :key="j"
+                      v-for="(child, j) in route.children">{{ child.meta.title }}
         </el-menu-item>
       </el-submenu>
-      <el-menu-item v-else :key="i" :index="route.path">
+      <el-menu-item :index="route.path" :key="i" v-else>
         <i :class="route.meta.icon"></i>
         <span slot="title">{{ route.meta.title }}</span>
       </el-menu-item>

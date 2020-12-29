@@ -29,11 +29,13 @@ instance.interceptors.response.use((response) => {
       confirmButtonText: '重新登录',
       cancelButtonText: '取消',
       type: 'warning',
-    }).then(() => {
-      store.dispatch('user/resetToken').then(() => {
-        document.location.reload();
+    })
+      .then(() => {
+        store.dispatch('user/logout')
+          .then(() => {
+            document.location.reload();
+          });
       });
-    });
   }
   return Promise.reject(new Error(data.message || 'Error'));
 }, (error) => {

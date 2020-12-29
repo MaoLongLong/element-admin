@@ -1,28 +1,28 @@
 <template>
   <div id="login-container">
-    <el-card shadow="always" id="login-form">
+    <el-card id="login-form" shadow="always">
       <el-form :model="loginForm">
         <div id="title-container">
           <h3>Classroom</h3>
         </div>
         <el-form-item>
           <el-input
+            placeholder="用户名 (admin)"
             prefix-icon="el-icon-user"
-            v-model="loginForm.username"
-            placeholder="用户名 (admin)"/>
+            v-model="loginForm.username"/>
         </el-form-item>
         <el-form-item>
           <el-input
+            placeholder="密码 (123)"
             prefix-icon="el-icon-lock"
-            v-model="loginForm.password"
             type="password"
-            placeholder="密码 (123)"/>
+            v-model="loginForm.password"/>
         </el-form-item>
         <el-form-item>
           <el-button
             :loading="loading"
-            style="width: 100%"
             @click="handleSubmit"
+            style="width: 100%"
             type="primary">
             登录
           </el-button>
@@ -47,14 +47,16 @@ export default {
   methods: {
     handleSubmit() {
       this.loading = true;
-      this.$store.dispatch('user/login', this.loginForm).then(() => {
-        this.$router.push({ path: this.$route.query.redirect || '/' });
-        this.$message.success('登录成功');
-        this.loading = false;
-      }).catch((err) => {
-        this.loading = false;
-        this.$message.error(err.message);
-      });
+      this.$store.dispatch('user/login', this.loginForm)
+        .then(() => {
+          this.$router.push({ path: this.$route.query.redirect || '/' });
+          this.$message.success('登录成功');
+          this.loading = false;
+        })
+        .catch((err) => {
+          this.loading = false;
+          this.$message.error(err.message);
+        });
     },
   },
 };

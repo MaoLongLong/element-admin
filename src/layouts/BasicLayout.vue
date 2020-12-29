@@ -4,7 +4,7 @@
       <div id="logo">Classroom</div>
       <div id="user-info">
         <!--suppress HtmlUnknownTarget -->
-        <el-avatar id="avatar" :src="avatar"/>
+        <el-avatar :src="avatar" id="avatar"/>
         <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           {{ name }}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -40,10 +40,11 @@ export default {
   methods: {
     handleCommand(command) {
       if (command === 'logout') {
-        this.$store.dispatch('user/logout').then(() => {
-          this.$router.push('/login');
-          this.$message.success('注销成功');
-        });
+        this.$store.dispatch('user/logout')
+          .then(() => {
+            this.$router.push('/login');
+            this.$message.success('注销成功');
+          });
       }
     },
   },

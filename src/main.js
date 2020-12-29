@@ -6,11 +6,13 @@ import './lib/font/font.css';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import './permission';
 
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 
+// noinspection JSUnusedGlobalSymbols
 new Vue({
   router,
   store,

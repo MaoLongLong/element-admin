@@ -1,13 +1,13 @@
 <template>
-    <div id="classroom">
-      <Crud :options="crudOptions"/>
-    </div>
+  <div id="classroom">
+    <Crud :options="crudOptions"/>
+  </div>
 </template>
 
 <script>
 import Crud from '../../components/Crud.vue';
 import {
-  getList, add, remove, update,
+  add, getList, remove, update,
 } from '../../api/classroom';
 import { getAll } from '../../api/building';
 
@@ -24,10 +24,25 @@ export default {
         remove,
         update,
         columns: [
-          { prop: 'id', label: '#', pk: true },
-          { prop: 'name', label: '名称' },
-          { prop: 'capacity', label: '可容纳人数', type: 'number' },
-          { prop: 'status', label: '空闲', type: 'boolean' },
+          {
+            prop: 'id',
+            label: '#',
+            pk: true,
+          },
+          {
+            prop: 'name',
+            label: '名称',
+          },
+          {
+            prop: 'capacity',
+            label: '可容纳人数',
+            type: 'number',
+          },
+          {
+            prop: 'status',
+            label: '空闲',
+            type: 'boolean',
+          },
           {
             prop: 'buildingName',
             label: '所属教学楼',
@@ -42,9 +57,10 @@ export default {
     };
   },
   mounted() {
-    getAll().then((resp) => {
-      this.crudOptions.columns[4].ref.select = resp.data;
-    });
+    getAll()
+      .then((resp) => {
+        this.crudOptions.columns[4].ref.select = resp.data;
+      });
   },
 };
 </script>
