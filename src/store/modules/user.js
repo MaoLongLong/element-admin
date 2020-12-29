@@ -1,4 +1,4 @@
-import { getInfo, login as loginApi } from '../../api/user';
+import { getInfo, login } from '../../api/user';
 import { getToken, removeToken, setToken } from '../../utils/auth';
 import {
   RESET_STATE, SET_AVATAR, SET_NAME, SET_TOKEN,
@@ -29,7 +29,7 @@ const actions = {
   login({ commit }, userInfo) {
     const { username, password } = userInfo;
     return new Promise((resolve, reject) => {
-      loginApi({
+      login({
         username: username.trim(),
         password,
       })
@@ -48,9 +48,9 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo()
         .then((resp) => {
-          const { data } = resp;
+          const { data, code } = resp;
 
-          if (!data) {
+          if (!data || code === 401) {
             reject(new Error('Verification failed, please Login again.'));
           }
 
