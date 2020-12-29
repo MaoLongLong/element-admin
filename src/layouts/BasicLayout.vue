@@ -2,7 +2,18 @@
   <el-container id="basic-layout">
     <el-header id="header">
       <div id="logo">Classroom</div>
-      <el-avatar :src="avatar" />
+      <div id="user-info">
+        <!--suppress HtmlUnknownTarget -->
+        <el-avatar id="avatar" :src="avatar"/>
+        <el-dropdown @command="handleCommand">
+        <span class="el-dropdown-link">
+          {{ name }}<i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </el-header>
     <el-container id="sub">
       <el-aside id="aside" width="200px">
@@ -18,23 +29,41 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Menu from '../components/Menu.vue';
-import avatar from '../assets/avatar.png';
 
 export default {
   name: 'BasicLayout',
   components: {
     Menu,
   },
-  data() {
-    return {
-      avatar,
-    };
+  methods: {
+    handleCommand(command) {
+      if (command === 'logout') {
+        this.$store.dispatch('user/logout').then(() => {
+          this.$router.push('/login');
+          this.$message.success('注销成功');
+        });
+      }
+    },
+  },
+  computed: {
+    ...mapGetters(['avatar', 'name']),
   },
 };
 </script>
 
 <style lang="scss" scoped>
+  .el-dropdown-link {
+    font-size: 18px;
+    cursor: pointer;
+    /*color: #409EFF;*/
+  }
+
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+
   #basic-layout {
     height: 100%;
 
@@ -50,6 +79,15 @@ export default {
         font-size: 30px;
         user-select: none;
         display: inline-block;
+      }
+
+      #user-info {
+        display: flex;
+        align-items: center;
+
+        #avatar {
+          margin-right: 10px;
+        }
       }
     }
 

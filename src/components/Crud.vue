@@ -11,7 +11,7 @@
         prefix-icon="el-icon-search"
         v-model="keyword"
         placeholder="输入关键字搜索"
-        @change="reload"
+        @change="reload()"
         style="width: 200px" />
     </div>
     <el-table
@@ -179,7 +179,6 @@ export default {
     handleDetails(row) {
       this.options.getDetails({ id: row.id })
         .then((resp) => {
-          console.log(resp);
           this.detailsData = resp.data;
           this.detailsDialogVisible = true;
         });

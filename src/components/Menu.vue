@@ -27,7 +27,7 @@ export default {
   name: 'Menu',
   computed: {
     routes() {
-      return this.$router.options.routes[0].children;
+      return this.$router.options.routes[1].children;
     },
   },
 };
