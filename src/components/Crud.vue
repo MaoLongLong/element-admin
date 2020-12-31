@@ -67,6 +67,7 @@
     <div class="pagination-wrapper">
       <el-pagination
         :page-size.sync="pageSize"
+        :current-page.sync="pageNum"
         :total="total"
         @current-change="reload"
         @size-change="reload()"
@@ -156,6 +157,7 @@ export default {
       tableData: [],
       form: {},
       total: 0,
+      pageNum: 1,
       pageSize: 10,
       keyword: '',
     };
@@ -208,6 +210,7 @@ export default {
       }
     },
     reload(pageNum = 1) {
+      this.pageNum = pageNum;
       this.loading = true;
       this.options.getList({
         pageNum,
