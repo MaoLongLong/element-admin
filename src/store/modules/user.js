@@ -1,11 +1,12 @@
 import { getInfo, login } from '../../api/user';
 import { getToken, removeToken, setToken } from '../../utils/auth';
 import {
-  RESET_STATE, SET_AVATAR, SET_NAME, SET_TOKEN,
+  RESET_STATE, SET_AVATAR, SET_NAME, SET_TOKEN, SET_UID,
 } from '../mutation-types';
 
 const getDefaultState = () => ({
   token: getToken(),
+  uid: -1,
   name: '',
   avatar: '',
 });
@@ -22,6 +23,9 @@ const mutations = {
   },
   [SET_AVATAR]: (state, avatar) => {
     state.avatar = avatar;
+  },
+  [SET_UID]: (state, uid) => {
+    state.uid = uid;
   },
 };
 
@@ -54,8 +58,9 @@ const actions = {
             reject(new Error('Verification failed, please Login again.'));
           }
 
-          const { nickname, avatar } = data;
+          const { uid, nickname, avatar } = data;
 
+          commit(SET_UID, uid);
           commit(SET_NAME, nickname);
           commit(SET_AVATAR, avatar);
           resolve(data);

@@ -20,7 +20,7 @@ export function getAll() {
 
 export function getDetails({ id }) {
   return request({
-    url: '/building/detail',
+    url: '/building/details',
     method: 'GET',
     params: {
       id,

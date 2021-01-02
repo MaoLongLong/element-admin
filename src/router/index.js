@@ -55,6 +55,24 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/sys',
+        component: EmptyLayout,
+        meta: {
+          title: '系统管理',
+          icon: 'el-icon-setting',
+        },
+        children: [
+          {
+            path: '/sys/user',
+            name: 'User',
+            component: () => import('../views/sys/User.vue'),
+            meta: {
+              title: '用户管理',
+            },
+          },
+        ],
+      },
     ],
   },
 ];
