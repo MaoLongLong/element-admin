@@ -40,7 +40,7 @@ export function remove({ id }) {
   return request({
     url: '/building',
     method: 'DELETE',
-    data: {
+    params: {
       id,
     },
   });

@@ -20,7 +20,7 @@ export function remove({ id }) {
   return request({
     url: '/classroom',
     method: 'DELETE',
-    data: {
+    params: {
       id,
     },
   });
