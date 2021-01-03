@@ -1,9 +1,7 @@
 <template>
   <el-menu
     :default-active="$route.path"
-    mode="vertical"
-    router
-    unique-opened>
+    router>
     <template v-for="(route, i) in routes">
       <el-submenu :index="route.path" :key="i" v-if="route.children">
         <template slot="title">
