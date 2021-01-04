@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import '../theme/index.css';
 import 'normalize.css/normalize.css';
 import './lib/font/font.css';
 import App from './App.vue';

@@ -1,5 +1,7 @@
 <template>
   <el-menu
+    :collapse="collapse"
+    :collapse-transition="false"
     :default-active="$route.path"
     router>
     <template v-for="(route, i) in routes">
@@ -23,6 +25,7 @@
 <script>
 export default {
   name: 'Menu',
+  props: ['collapse'],
   computed: {
     routes() {
       return this.$router.options.routes[1].children;
@@ -36,7 +39,7 @@ export default {
     user-select: none;
 
     .el-menu-item.is-active {
-      background-color: #ecf5ff !important;
+      background-color: #ecf8f3 !important;
     }
   }
 </style>

@@ -1,26 +1,49 @@
 <template>
   <el-container id="basic-layout">
-    <el-header id="header">
-      <div id="logo">Classroom</div>
-      <div id="user-info">
-        <!--suppress HtmlUnknownTarget -->
-        <el-avatar :src="avatar" id="avatar"/>
-        <el-dropdown @command="handleCommand">
-        <span class="el-dropdown-link">
-          {{ name }}<i class="el-icon-arrow-down el-icon--right"></i>
-        </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="logout">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+    <el-aside id="aside" :style="{
+      minWidth: collapse ? 'unset' : '200px',
+      width: 'auto',
+    }">
+      <div id="logo" v-show="!collapse">
+        Classroom
       </div>
-    </el-header>
+      <Menu :collapse="collapse"/>
+    </el-aside>
     <el-container id="sub">
-      <el-aside id="aside" width="200px">
-        <Menu/>
-      </el-aside>
+      <el-header id="header">
+        <div id="trigger" @click="collapse = !collapse">
+          <i :class="collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></i>
+        </div>
+        <div id="user-info">
+          <!--suppress HtmlUnknownTarget -->
+          <el-avatar :src="avatar" id="avatar"/>
+          <el-dropdown @command="handleCommand">
+          <span class="el-dropdown-link">
+            {{ name }}<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </el-header>
       <el-scrollbar id="scrollbar">
-        <el-main>
+        <el-backtop target=".el-scrollbar__wrap">
+          <div
+            style="{
+              height: 100%;
+              width: 100%;
+              background-color: #ecf8f3;
+              box-shadow: 0 0 6px rgba(0,0,0, .12);
+              text-align: center;
+              line-height: 40px;
+              color: #41b883;
+            }"
+          >
+            UP
+          </div>
+        </el-backtop>
+        <el-main class="main-container">
           <router-view/>
         </el-main>
       </el-scrollbar>
@@ -36,6 +59,11 @@ export default {
   name: 'BasicLayout',
   components: {
     Menu,
+  },
+  data() {
+    return {
+      collapse: false,
+    };
   },
   methods: {
     handleCommand(command) {
@@ -68,38 +96,45 @@ export default {
   #basic-layout {
     height: 100%;
 
-    #header {
-      border-bottom: #DCDFE6 solid 1px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    #aside {
+      overflow: hidden;
 
       #logo {
-        font-family: "Indie Flower", sans-serif;
-        font-weight: bold;
+        margin: 12px 0;
         font-size: 30px;
+        font-weight: bold;
         user-select: none;
-        display: inline-block;
+        font-family: "Indie Flower", sans-serif;
+        color: #303133;
+        text-align: center;
       }
 
-      #user-info {
-        display: flex;
-        align-items: center;
-
-        #avatar {
-          margin-right: 10px;
-        }
+      .el-menu {
+        border-right: none;
       }
     }
 
     #sub {
       height: calc(100% - 60px);
 
-      #aside {
-        overflow: hidden;
+      #header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        .el-menu {
-          border-right: none;
+        #trigger {
+          font-size: 28px;
+          cursor: pointer;
+          display: inline-block;
+        }
+
+        #user-info {
+          display: flex;
+          align-items: center;
+
+          #avatar {
+            margin-right: 10px;
+          }
         }
       }
 

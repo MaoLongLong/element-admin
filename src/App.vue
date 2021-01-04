@@ -18,4 +18,8 @@
   #app {
     height: 100%;
   }
+
+  #nprogress .bar {
+    background: #41b883 !important; //自定义颜色
+  }
 </style>
