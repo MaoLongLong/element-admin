@@ -164,9 +164,7 @@ export default {
   },
   methods: {
     handleEdit(row) {
-      const form = { ...row };
-      form.status = form.status === 1;
-      this.form = form;
+      this.form = row;
       this.dialogTitle = '编辑';
       this.addDialogVisible = true;
     },

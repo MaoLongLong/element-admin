@@ -3,7 +3,7 @@
     <el-card id="login-form" shadow="always">
       <el-form :model="loginForm">
         <div id="title-container">
-          <h3>Classroom</h3>
+          <h3>Log in</h3>
         </div>
         <el-form-item>
           <el-input
