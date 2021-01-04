@@ -115,9 +115,10 @@ export default {
     }
 
     #sub {
-      height: calc(100% - 60px);
+      height: 100%;
 
       #header {
+        height: 60px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -139,7 +140,7 @@ export default {
       }
 
       #scrollbar {
-        height: 100%;
+        height: calc(100% - 60px);
         width: 100%;
 
         /deep/ .el-scrollbar__wrap {
