@@ -97,6 +97,7 @@ export default {
     height: 100%;
 
     #aside {
+      background-color: #35495e;
       overflow: hidden;
 
       #logo {
@@ -105,7 +106,8 @@ export default {
         font-weight: bold;
         user-select: none;
         font-family: "Indie Flower", sans-serif;
-        color: #303133;
+        /*color: #303133;*/
+        color: #fff;
         text-align: center;
       }
 
@@ -122,6 +124,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-bottom: 1px solid #dee1e6;
 
         #trigger {
           font-size: 28px;

@@ -2,6 +2,9 @@
   <el-menu
     :collapse="collapse"
     :collapse-transition="false"
+    background-color="#35495e"
+    text-color="#fff"
+    active-text-color="#4fc08d"
     :default-active="$route.path"
     router>
     <template v-for="(route, i) in routes">
@@ -39,7 +42,7 @@ export default {
     user-select: none;
 
     .el-menu-item.is-active {
-      background-color: #ecf8f3 !important;
+      background-color: #2a3a4b !important;
     }
   }
 </style>
