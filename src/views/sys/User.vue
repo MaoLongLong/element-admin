@@ -39,9 +39,10 @@ export default {
   },
   methods: {
     loadUser() {
-      getList().then((resp) => {
-        this.users = resp.data;
-      });
+      getList()
+        .then((resp) => {
+          this.users = resp.data;
+        });
     },
   },
   mounted() {
